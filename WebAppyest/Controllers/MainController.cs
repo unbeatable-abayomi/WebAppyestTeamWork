@@ -32,6 +32,10 @@ namespace WebAppyest.Controllers
         {
             return View();
         }
+        public IActionResult Roles()
+        {
+            return View();
+        }
         public IActionResult Index()
         {
             return View();

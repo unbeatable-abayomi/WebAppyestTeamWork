@@ -22,6 +22,7 @@
                     <li><a lass="nav-link text-dark" asp-area="" asp-controller="Main" asp-action="Taskboard"><i class="fa fa-calendar-check-o"></i><span>Taskboard</span></a></li>
                     <li><a lass="nav-link text-dark" asp-area="" asp-controller="Main" asp-action="Activities"><i class="fa fa-newspaper-o"></i><span>Activities</span></a></li>
                     <li><a lass="nav-link text-dark" asp-area="" asp-controller="Main" asp-action="Players"><i class="fa fa-newspaper-o"></i><span>Team Players</span></a></li>
+                    <li><a lass="nav-link text-dark" asp-area="" asp-controller="Main" asp-action="Roles"><i class="fa fa-newspaper-o"></i><span>Roles</span></a></li>
                     <li><a href="project-ticket.html"><i class="fa fa-list-ul"></i><span>Ticket List</span></a></li>
                     <li><a href="project-ticket-details.html"><i class="icon-tag"></i><span>Ticket Details</span></a></li>
                     <li><a href="project-clients.html"><i class="fa fa-user"></i><span>Clients</span></a></li>
@@ -76,6 +77,9 @@
                         </li>
                         <li class="nav-item">
                             @RenderSection("Players", required: false)
+                        </li>
+                        <li class="nav-item">
+                            @RenderSection("Roles", required: false)
                         </li>
                     </ul>
                 </div>
