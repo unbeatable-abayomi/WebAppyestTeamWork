@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebAppyest.Data;
+using WebAppyest.Repository;
 
 namespace WebAppyest
 {
@@ -25,6 +28,11 @@ namespace WebAppyest
         {
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddTransient<ITask, TaskRepo>();
+            services.AddTransient<IActivities, ActivitiesRepository>();
+            services.AddTransient<IActivityTitle, ActivityTitleRepository>();
+            string conString = Configuration["ConnectionStrings:newConnections"];
+            services.AddDbContext<DataContext>(options => options.UseSqlServer(conString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
