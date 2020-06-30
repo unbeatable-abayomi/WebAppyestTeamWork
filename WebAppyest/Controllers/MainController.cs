@@ -25,6 +25,7 @@ namespace WebAppyest.Controllers
 
         public IActionResult Activities()
         {
+
             return View();
         }
 

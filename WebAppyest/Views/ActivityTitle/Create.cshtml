@@ -1,0 +1,44 @@
+﻿@model WebAppyest.ActivitiesViewModels.MultipleActivityModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>ActivityTitle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.Acts.Title" class="control-label"></label>
+                <input asp-for="@Model.Acts.Title" class="form-control" />
+                <span asp-validation-for="@Model.Acts.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@foreach (var item in Model.ActT)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.ActivityId" class="btn btn-primary" >Edit</a> |
+            <a asp-action="DeleteConfirm" asp-route-id="@item.ActivityId" class="btn btn-danger" >Delete</a>
+        </td>
+    </tr><br /><br />
+}
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,74 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using WebAppyest.ActivitiesViewModels;
+using WebAppyest.Models;
+using WebAppyest.ServiceRepository;
+
+namespace WebAppyest.Controllers
+{
+    public class ActivityTitleController : Controller
+    {
+        private readonly IActivityTitle _activity;
+        private readonly DataContext _act;
+        public ActivityTitleController(IActivityTitle act, DataContext a)
+        {
+            _activity = act;
+            _act = a;
+        }
+        public IActionResult List(long Id)
+        {
+            ActivityTitle act = _activity.GetTitle(Id);
+            return View(act);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            var act = new MultipleActivityModel()
+            {
+                ActT = _act.ActivityTitleTable.ToList()
+            };
+            return View(act);
+        }
+        public IActionResult Create(MultipleActivityModel titl)
+        {
+            
+                _activity.AddTitle(titl.Acts);
+                return RedirectToAction(nameof(Create));
+            
+        }
+
+        [HttpGet]
+        public IActionResult Edit(long Id)
+        {
+            ActivityTitle act = _activity.GetTitle(Id);
+            return View(act);
+        }
+        [HttpPost]
+        public IActionResult Edit(ActivityTitle act)
+        {
+            _activity.EditTitle(act);
+            return RedirectToAction(nameof(Create));
+        }
+
+        [HttpGet]
+        public IActionResult DeleteConfirm(long Id)
+        {
+            ActivityTitle acti = _activity.GetTitle(Id);
+            return View(acti);
+        }
+        [HttpPost]
+        public IActionResult DeleteConfirm(ActivityTitle act, long Id)
+        {
+            _activity.Delete(Id);
+            return RedirectToAction(nameof(Create));
+        }
+        public IActionResult Index()
+        {
+            return View();
+        }
+    }
+}
